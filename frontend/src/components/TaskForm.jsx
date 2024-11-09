@@ -1,14 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TodoContext } from "../context/toDoContext";
 
 function TaskForm() {
-  const [task, setTask] = useState([{
-    heading: "",
-    description: "",
-    deadlineDate: "",
-    deadlineTime: "",
-    status: "todo",
-    assignee: "",
-  }]);
+ 
+  const { task, setTask } = useContext(TodoContext); 
+
 
   const [tasks, setTasks] = useState([]);
   const [successMessage, setSuccessMessage] = useState(""); 
@@ -66,18 +62,18 @@ function TaskForm() {
 
   return (
     <>
-      <div className="task flex justify-center items-center ">
+      <div className="task flex justify-center items-center py-4 rounded-md ">
         {successMessage ? (
-          <div className="bg-green-200 p-4 rounded-md text-center">
+          <div className="bg-green-400 p-4 rounded-md text-center">
             <p>{successMessage}</p>
-            <button onClick={handleShowForm} className="mt-4 bg-gray-500 text-white p-2 rounded-md">
+            <button onClick={handleShowForm} className="mt-4 bg-slate-300 text-black p-2 rounded-md">
               Add Another Task
             </button>
           </div>
         ) : showForm ? (
-          <div className="bg-white  p-6 rounded-md shadow-lg transform -translate-y-4">
+          <div className=" ">
             <form onSubmit={handleSave} className="flex gap-3 flex-col">
-              <div className="flex gap-2">
+              <div className="flex gap-11 items-center">
                 <label>Heading:</label>
                 <input
                   type="text"
@@ -89,18 +85,18 @@ function TaskForm() {
                 />
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-6 items-center">
                 <label>Description:</label>
                 <textarea
                   name="description"
                   value={task[0].description}
                   onChange={handleInputChange}
                   placeholder="Task Description"
-                  className="border p-2 rounded-md"
+                  className="border w-[12.4rem] p-2 rounded-md"
                 />
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 items-center">
                 <label>Deadline Date:</label>
                 <input
                   type="date"
@@ -111,7 +107,7 @@ function TaskForm() {
                 />
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 items-center">
                 <label>Deadline Time:</label>
                 <input
                   type="time"
@@ -122,7 +118,7 @@ function TaskForm() {
                 />
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-16 items-center">
                 <label>Status:</label>
                 <select
                   name="status"
@@ -136,7 +132,7 @@ function TaskForm() {
                 </select>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-10 items-center">
                 <label>Assign to:</label>
                 <input
                   type="text"
@@ -154,7 +150,7 @@ function TaskForm() {
             </form>
           </div>
         ) : (
-          <button onClick={handleShowForm} className="bg-gray-800 text-white px-4 py-2 rounded-md mt-4">
+          <button onClick={handleShowForm} className="bg-gray-800 text-white px-4 py-2 rounded-md">
             Add Task
           </button>
         )}
@@ -164,3 +160,5 @@ function TaskForm() {
 }
 
 export default TaskForm;
+
+

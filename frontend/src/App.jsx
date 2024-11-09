@@ -2,12 +2,14 @@ import { useState } from "react";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
 import TaskDetail from "./components/taskDetail";
+import { TodoProvider } from "./context/toDoContext";
 
 function App() {
 
 
   return (
     <>
+    <TodoProvider>
       <div className="flex gap-4 my-4 mx-4 ">
 
 
@@ -19,7 +21,7 @@ function App() {
         <TaskList className="w-[70%]" />
 
       </div>
-
+      </TodoProvider>
 
     </>
   );

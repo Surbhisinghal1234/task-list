@@ -1,15 +1,27 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import 'dotenv/config';
 
 const app = express();
 
-app.use(cors());
-app.use(express.json()); 
+app.use(express.json());
+app.use(cors({
+  origin: '*', 
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/taskdb').then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+}));
+app.use(express.urlencoded({ extended: true }));
+const username = process.env.MONGO_USERNAME;
+const password = encodeURIComponent(process.env.MONGO_PASSWORD);
+const dbName = "toDoApp"; 
+
+mongoose.connect(
+  `mongodb+srv://${username}:${password}@cluster0.3j0ywmp.mongodb.net/${dbName}?retryWrites=true&w=majority&appName=Cluster0`
+).then(() => {
+  console.log('Connected to MongoDB');
+}).catch((error) => {
+  console.error('MongoDB connection error', error);
+});
 
 // Task Model
 const Task = mongoose.model('Task', new mongoose.Schema({
@@ -77,6 +89,19 @@ app.get("/tasks", async (req, res) => {
     res.status(500).json({ error: "Error fetching tasks" });
   }
 });
+// DELETE Route
+app.delete("/tasks/:id", async (req, res) => {
+  const { id } = req.params;
 
+  try {
+    const task = await Task.findByIdAndDelete(id); 
+    if (!task) {
+      return res.status(404).json({ error: "Task not found" });
+    }
+    res.status(200).json({ message: "Task deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Error deleting task" });
+  }
+});
 // Server
 app.listen(5000, () => console.log('Server running on port 5000'));
