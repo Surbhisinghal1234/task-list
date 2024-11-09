@@ -24,7 +24,7 @@ function TaskForm() {
     setTasks((prevTasks) => [...prevTasks, task[0]]);
 
     try {
-      const response = await fetch("http://localhost:5000/tasks", {
+      const response = await fetch("https://task-list-rcdy.onrender.com/tasks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

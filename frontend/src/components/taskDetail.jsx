@@ -11,7 +11,7 @@ function TaskDetail() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/tasks")
+      .get("https://task-list-rcdy.onrender.com/tasks")
       .then((response) => {
         const { todo, inProgress, completed } = response.data;
 

@@ -9,7 +9,7 @@ function TaskList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/tasks")
+      .get("https://task-list-rcdy.onrender.com/tasks")
       .then((response) => {
         setTasks(response.data);
       })
@@ -20,7 +20,7 @@ function TaskList() {
 
   const deleteTask = (taskId) => {
     axios
-      .delete(`http://localhost:5000/tasks/${taskId}`)
+      .delete(`https://task-list-rcdy.onrender.com/tasks/${taskId}`)
       .then(() => {
        
         setTasks((prevTasks) => {
