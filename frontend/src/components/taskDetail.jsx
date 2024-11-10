@@ -34,10 +34,14 @@ function TaskDetail() {
     <>
       
 
-    <div className="task-summary flex flex-col gap-4  rounded-md text-center">
-      <p className="bg-gray-200 task px-2 py-8 rounded-md"> <span className="text-2xl font-semibold flex flex-col justify-start">Total Tasks:</span> <span className="text-3xl font-bold">{taskCounts.total}</span> </p>
-      <p className="bg-gray-200  task px-2 py-8 rounded-md"><span className="text-2xl font-semibold flex flex-col justify-start">Active Tasks</span> <span className="text-3xl font-bold"> {taskCounts.active}/{taskCounts.total}</span></p>
-      <p className="bg-gray-200 task px-2 py-8  rounded-md"><span className="text-2xl font-semibold flex flex-col justify-start">Completed Tasks:</span> <span className="text-3xl font-bold"> {taskCounts.completed}/{taskCounts.total}</span> </p>
+    <div className="task-summary flex flex-col lg:flex-col sm:flex-row gap-4 rounded-md text-center justify-center lg:justify-normal">
+
+      <p className="bg-gray-200 task sm:w-[33%] md:w-full  px-2 py-8 rounded-md"> <span className="text-2xl font-semibold flex flex-col justify-start">Total Tasks:</span> <span className="text-3xl font-bold">{taskCounts.total}</span> </p>
+
+      <p className="bg-gray-200 sm:w-[33%] md:w-full  task px-2 py-8 rounded-md"><span className="text-2xl font-semibold flex flex-col justify-start">Active Tasks</span> <span className="text-3xl font-bold"> {taskCounts.active}/{taskCounts.total}</span></p>
+
+      <p className="bg-gray-200 sm:w-[33%] md:w-full task px-2 py-8  rounded-md"><span className="text-2xl font-semibold flex flex-col justify-start">Completed Tasks:</span> <span className="text-3xl font-bold"> {taskCounts.completed}/{taskCounts.total}</span> </p>
+      
     </div>
     </>
 

@@ -62,7 +62,7 @@ function TaskForm() {
 
   return (
     <>
-      <div className="task flex justify-center items-center py-4 rounded-md ">
+      <div className="task flex justify-center items-center py-4 rounded-md px-4">
         {successMessage ? (
           <div className="bg-green-400 p-4 rounded-md text-center">
             <p>{successMessage}</p>

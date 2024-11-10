@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../App.css";
@@ -38,9 +36,9 @@ function TaskList() {
 
   return (
     <>
-      <div className="flex justify-center gap-4 w-[100%]">
+      <div className="flex justify-center gap-4 w-[100%] flex-col md:flex-row">
       
-        <div className="flex task flex-col gap-4 rounded-lg p-4 bg-gray-200 items-center w-[30%]">
+        <div className="flex task flex-col gap-4 rounded-lg p-4 bg-gray-200 items-center md:w-[33%]">
           <h3 className="text-2xl font-bold text-center">To Do</h3>
           {tasks.todo.length === 0 ? (
             <p>No tasks in To Do.</p>
@@ -66,7 +64,7 @@ function TaskList() {
         </div>
 
         
-        <div className="flex task flex-col gap-4 rounded-lg p-4 bg-gray-300 items-center w-[30%]">
+        <div className="flex task flex-col gap-4 rounded-lg p-4 bg-gray-300 items-center md:w-[33%]">
           <h3 className="text-2xl font-bold text-center">In Progress</h3>
           {tasks.inProgress.length === 0 ? (
             <p>No tasks in Progress.</p>
@@ -93,7 +91,7 @@ function TaskList() {
         </div>
 
   
-        <div className="flex task flex-col bg-gray-300 rounded-lg gap-4 p-4 items-center w-[30%]">
+        <div className="flex task flex-col bg-gray-300 rounded-lg gap-4 p-4 items-center  md:w-[33%]">
           <h3 className="text-2xl font-bold text-center">Completed</h3>
           {tasks.completed.length === 0 ? (
             <p>No tasks completed.</p>
