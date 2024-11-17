@@ -1,19 +1,21 @@
 import { useContext, useState } from "react";
 import { TodoContext } from "../context/ToDoContext";
+import { useNavigate } from "react-router-dom";
+
 
 function TaskForm() {
  
   const { task, setTask } = useContext(TodoContext); 
 
 
-  const [tasks, setTasks] = useState([]);
-  const [successMessage, setSuccessMessage] = useState(""); 
-  const [showForm, setShowForm] = useState(false); 
+
+  const navigate = useNavigate(); 
+ 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setTask((prevTask) => [{
-      ...prevTask[0],
+      ...prevTask,
       [name]: value,
     }]);
   };
@@ -21,7 +23,7 @@ function TaskForm() {
   const handleSave = async (e) => {
     e.preventDefault();
   
-    setTasks((prevTasks) => [...prevTasks, task[0]]);
+    setTask((prevTasks) => [...prevTasks, task]);
 
     try {
       const response = await fetch("https://task-list-rcdy.onrender.com/tasks", {
@@ -29,7 +31,7 @@ function TaskForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(task[0]),
+        body: JSON.stringify(task),
       });
   
       const data = await response.json();
@@ -44,7 +46,8 @@ function TaskForm() {
           status: "todo",
           assignee: "",
         }]);
-        setShowForm(false);
+       
+        navigate("/taskList");
       } else {
         alert("Error creating task");
       }
@@ -62,15 +65,8 @@ function TaskForm() {
 
   return (
     <>
-      <div className="task flex justify-center items-center py-4 rounded-md px-4">
-        {successMessage ? (
-          <div className="bg-green-400 p-4 rounded-md text-center">
-            <p>{successMessage}</p>
-            <button onClick={handleShowForm} className="mt-4 bg-slate-300 text-black p-2 rounded-md">
-              Add Another Task
-            </button>
-          </div>
-        ) : showForm ? (
+      <div className="task h-[67.5vh] flex justify-center items-center rounded-md px-4">
+       
           <div className=" ">
             <form onSubmit={handleSave} className="flex gap-3 flex-col">
               <div className="flex gap-11 items-center">
@@ -78,7 +74,7 @@ function TaskForm() {
                 <input
                   type="text"
                   name="heading"
-                  value={task[0].heading}
+                  value={task.heading}
                   onChange={handleInputChange}
                   placeholder="Task Heading"
                   className="border p-2 rounded-md"
@@ -89,7 +85,7 @@ function TaskForm() {
                 <label>Description:</label>
                 <textarea
                   name="description"
-                  value={task[0].description}
+                  value={task.description}
                   onChange={handleInputChange}
                   placeholder="Task Description"
                   className="border w-[12.4rem] p-2 rounded-md"
@@ -101,7 +97,7 @@ function TaskForm() {
                 <input
                   type="date"
                   name="deadlineDate"
-                  value={task[0].deadlineDate}
+                  value={task.deadlineDate}
                   onChange={handleInputChange}
                   className="border p-2 rounded-md"
                 />
@@ -112,7 +108,7 @@ function TaskForm() {
                 <input
                   type="time"
                   name="deadlineTime"
-                  value={task[0].deadlineTime}
+                  value={task.deadlineTime}
                   onChange={handleInputChange}
                   className="border p-2 rounded-md"
                 />
@@ -122,7 +118,7 @@ function TaskForm() {
                 <label>Status:</label>
                 <select
                   name="status"
-                  value={task[0].status}
+                  value={task.status}
                   onChange={handleInputChange}
                   className="border p-2 rounded-md"
                 >
@@ -136,8 +132,8 @@ function TaskForm() {
                 <label>Assign to:</label>
                 <input
                   type="text"
-                  name="assignee"
-                  value={task[0].assignee}
+                  name="assignTo"
+                  value={task.assignTo}
                   onChange={handleInputChange}
                   placeholder="Assign to"
                   className="border p-2 rounded-md"
@@ -149,11 +145,8 @@ function TaskForm() {
               </button>
             </form>
           </div>
-        ) : (
-          <button onClick={handleShowForm} className="bg-gray-800 text-white px-4 py-2 rounded-md">
-            Add Task
-          </button>
-        )}
+
+        
       </div>
     </>
   );

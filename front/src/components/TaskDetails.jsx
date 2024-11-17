@@ -26,7 +26,7 @@ function TaskDetail() {
         });
       })
       .catch((error) => {
-        console.error("Error fetching task summary:", error);
+        console.error("Error fetching task summary", error);
       });
   }, []);
 
@@ -34,7 +34,7 @@ function TaskDetail() {
     <>
       
 
-    <div className="task-summary flex flex-col lg:flex-col sm:flex-row gap-4 rounded-md text-center justify-center lg:justify-normal">
+    <div className="task-summary flex gap-4 ">
 
       <p className="bg-gray-200 task sm:w-[33%] md:w-full  px-2 py-8 rounded-md"> <span className="text-2xl font-semibold flex flex-col justify-start">Total Tasks:</span> <span className="text-3xl font-bold">{taskCounts.total}</span> </p>
 

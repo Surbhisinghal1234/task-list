@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../App.css";
+import { Link } from "react-router-dom";
+import TaskDetail from "./TaskDetails";
 
 function TaskList() {
   const [tasks, setTasks] = useState({ todo: [], inProgress: [], completed: [] });
@@ -36,7 +38,8 @@ function TaskList() {
 
   return (
     <>
-      <div className="flex justify-center gap-4 w-[100%] flex-col md:flex-row">
+    <div className="flex flex-col gap-8 px-6 py-10">
+      <div className="flex justify-center gap-4 w-[100%] flex-col md:flex-row ">
       
         <div className="flex task flex-col gap-4 rounded-lg p-4 bg-gray-200 items-center md:w-[33%]">
           <h3 className="text-2xl font-bold text-center">To Do</h3>
@@ -50,7 +53,7 @@ function TaskList() {
 
                   <p><span className="font-semibold">Description:</span> <span>{task.description}</span> </p>
                   <p> <span className="font-semibold">Deadline:</span> <span> {task.deadlineDate} at {task.deadlineTime}</span></p>
-                  <p> <span className="font-semibold">Assignee:</span> <span>{task.assignee}</span> </p>
+                  <p> <span className="font-semibold">Assignee:</span> <span>{task.assignTo}</span> </p>
                   <button
                     className="bg-red-500 text-white py-1 px-4 rounded-md mt-2"
                     onClick={() => deleteTask(task._id)}
@@ -77,7 +80,7 @@ function TaskList() {
                   <p><span className="font-semibold">Description:</span> <span>{task.description}</span> </p>
 
                   <p> <span className="font-semibold">Deadline:</span> <span> {task.deadlineDate} at {task.deadlineTime}</span></p>
-                  <p> <span className="font-semibold">Assignee:</span> <span>{task.assignee}</span> </p>
+                  <p> <span className="font-semibold">Assignee:</span> <span>{task.assignTo}</span> </p>
                   <button
                     className="bg-red-500 text-white py-1 px-4 rounded-md mt-2"
                     onClick={() => deleteTask(task._id)}
@@ -103,7 +106,7 @@ function TaskList() {
                   <p><span className="font-semibold">Description:</span> <span>{task.description}</span> </p>
 
                   <p> <span className="font-semibold">Deadline:</span> <span> {task.deadlineDate} at {task.deadlineTime}</span></p>
-                  <p> <span className="font-semibold">Assignee:</span> <span>{task.assignee}</span> </p>
+                  <p> <span className="font-semibold">Assignee:</span> <span>{task.assignTo}</span> </p>
                   <button
                     className="bg-red-500 text-white py-1 px-4 rounded-md mt-2"
                     onClick={() => deleteTask(task._id)}
@@ -115,6 +118,8 @@ function TaskList() {
             </ul>
           )}
         </div>
+      </div>
+      <TaskDetail/>
       </div>
     </>
   );

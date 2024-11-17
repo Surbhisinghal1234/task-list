@@ -12,7 +12,7 @@ const TodoProvider = ({ children }) => {
             deadlineDate: "",
             deadlineTime: "",
             status: "todo",
-            assignee: "",
+            assignTo: "",
         }
     ])
 
