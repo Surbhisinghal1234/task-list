@@ -46,7 +46,7 @@ const Task = mongoose.model('Task', new mongoose.Schema({
     enum: ["todo", "in-progress", "complete"],
     default: "todo",
   },
-  assignee: {
+  assignTo: {
     type: String,
     required: true,
   },
@@ -54,7 +54,7 @@ const Task = mongoose.model('Task', new mongoose.Schema({
 
 // POST Route 
 app.post("/tasks", async (req, res) => {
-  const { heading, description, deadlineDate, deadlineTime, status, assignee } = req.body;
+  const { heading, description, deadlineDate, deadlineTime, status, assignTo } = req.body;
 
   try {
     const newTask = new Task({
@@ -63,7 +63,7 @@ app.post("/tasks", async (req, res) => {
       deadlineDate,
       deadlineTime,
       status,
-      assignee,
+      assignTo,
     });
 
     await newTask.save(); 
@@ -101,6 +101,31 @@ app.delete("/tasks/:id", async (req, res) => {
     res.status(200).json({ message: "Task deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: "Error deleting task" });
+  }
+});
+
+app.put("/tasks/:id", async (req, res) => {
+  const { id } = req.params;
+  const { heading, description, deadlineDate, deadlineTime, status, assignTo } = req.body;
+
+  try {
+    // Find the task by ID and update it
+    const updatedTask = await Task.findByIdAndUpdate(
+      id,
+      { heading, description, deadlineDate, deadlineTime, status, assignTo },
+      { new: true, runValidators: true }
+    );
+
+    // If task is not found, return error
+    if (!updatedTask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    // Send the updated task as a response
+    res.status(200).json(updatedTask);
+  } catch (error) {
+    console.error("Error updating task:", error);
+    res.status(500).json({ message: "Server error while updating the task" });
   }
 });
 // Server
