@@ -5,16 +5,14 @@ const TodoContext = createContext()
 
 const TodoProvider = ({ children }) => {
 
-    const [task, setTask] = useState([
-        {
-            heading: "",
-            description: "",
-            deadlineDate: "",
-            deadlineTime: "",
-            status: "todo",
-            assignTo: "",
-        }
-    ])
+    const [task, setTask] = useState({
+        heading: "",
+        description: "",
+        deadlineDate: "",
+        deadlineTime: "",
+        status: "todo",
+        assignTo: "",
+      });
 
     return (
         <>

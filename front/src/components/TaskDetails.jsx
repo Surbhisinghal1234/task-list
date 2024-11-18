@@ -8,10 +8,12 @@ function TaskDetail() {
     active: 0,
     completed: 0,
   });
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
+
 
   useEffect(() => {
     axios
-      .get("https://task-list-rcdy.onrender.com/tasks")
+      .get(`${API_URL}/tasks`)
       .then((response) => {
         const { todo, inProgress, completed } = response.data;
 

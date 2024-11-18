@@ -6,10 +6,11 @@ import TaskDetail from "./TaskDetails";
 
 function TaskList() {
   const [tasks, setTasks] = useState({ todo: [], inProgress: [], completed: [] });
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     axios
-      .get("https://task-list-rcdy.onrender.com/tasks")
+      .get(`${API_URL}/tasks`)
       .then((response) => {
         setTasks(response.data);
       })
@@ -20,7 +21,7 @@ function TaskList() {
 
   const deleteTask = (taskId) => {
     axios
-      .delete(`https://task-list-rcdy.onrender.com/tasks/${taskId}`)
+      .delete(`${API_URL}/${taskId}`)
       .then(() => {
        
         setTasks((prevTasks) => {
